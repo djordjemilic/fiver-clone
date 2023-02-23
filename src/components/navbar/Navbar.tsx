@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+
 import "./Navbar.scss";
 
 interface User {
@@ -11,6 +12,7 @@ interface User {
 const Navbar = () => {
   const [active, setActive] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { pathname } = useLocation();
   const currentUser: User = {
     id: 1,
     username: "John Doe",
@@ -30,7 +32,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className={active ? "nav active" : "nav"}>
+    <header className={active || pathname !== "/" ? "nav active" : "nav"}>
       <div className="container">
         <div className="nav__logo">
           <Link to="/" className="link">
@@ -54,13 +56,23 @@ const Navbar = () => {
                 <div className="options">
                   {currentUser?.isSeller && (
                     <>
-                      <span>Gigs</span>
-                      <span>Add New Gig</span>
+                      <Link className="link" to="/mygigs">
+                        Gigs
+                      </Link>
+                      <Link className="link" to="/add">
+                        Add New Gig
+                      </Link>
                     </>
                   )}
-                  <span>Orders</span>
-                  <span>Messages</span>
-                  <span>Logout</span>
+                  <Link className="link" to="/orders">
+                    Orders
+                  </Link>
+                  <Link className="link" to="/messages">
+                    Messages
+                  </Link>
+                  <Link className="link" to="/">
+                    Logout
+                  </Link>
                 </div>
               )}
             </div>
@@ -68,7 +80,7 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {active ? (
+      {active || pathname !== "/" ? (
         <>
           <hr />
           <div className="menu">
