@@ -114,3 +114,10 @@ hr {
   width: 200px;
   font-weight: 300;
 }
+
+* {
+  .link {
+    text-decoration: none;
+    color: inherit;
+  }
+}

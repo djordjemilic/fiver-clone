@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.scss";
 
 interface User {
@@ -32,17 +33,16 @@ const Navbar = () => {
     <header className={active ? "nav active" : "nav"}>
       <div className="container">
         <div className="nav__logo">
-          {/* <Link to=""> */}
-          <span className="logo__text">fiverr</span>
-          <span className="logo__dot">.</span>
-          {/* </Link> */}
+          <Link to="/" className="link">
+            <span className="logo__text">fiverr</span>
+            <span className="logo__dot">.</span>
+          </Link>
         </div>
         <nav className="nav__links">
           <ul className="nav__list">
             <li className="list__item">Fiverr Business</li>
             <li className="list__item">Explore</li>
             <li className="list__item">English</li>
-            <li className="list__item">Sign in</li>
             {!currentUser?.isSeller && <li className="list__item">Become a seller</li>}
           </ul>
           {!currentUser && <button className="nav__btn">Join</button>}
